@@ -45,9 +45,34 @@ Ports served:
 
 ## Init
 
-## models
+## Models
 
-## views
+### Song
+  id integer
+  name varchar
+  album_id integer
+  artist_id varchar
+
+### Album
+id varchar 
+genre_id varchar
+### Artist
+  name varchar
+  album varchar
+  genre_aff varchar
+
+### Genre
+id varchar
+### User
+  id integer 
+
+### Playlist
+  user_id varchar
+  label varchar
+### Plays
+  amount fk 
+## Views
+
 # Functional
 
 # OOP / Models / Thinking in Django REST 
