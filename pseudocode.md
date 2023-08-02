@@ -44,7 +44,17 @@ Ports served:
 ## Begin
 
 ## Init
-
+ - Punch the tables into the database
+ - start up postgresql
+ - install django
+ - install djangorestframework
+ - freeze >requirements.txt
+ - add the CORS FILE FROM THE READ.ME
+   - connect views in the app
+   - connect views in the project
+   - set up models in the app. don't forget to make migrations and migrate when they are made.
+     
+ 
 ## Models
 
 ### Song
@@ -72,7 +82,7 @@ id varchar
 ### Plays
   amount fk 
 ## Views
-
+# End
 # Functional
 
 # OOP / Models / Thinking in Django REST 
