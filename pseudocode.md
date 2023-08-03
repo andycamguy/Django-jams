@@ -81,7 +81,8 @@ id varchar
   label varchar
 ### Plays
   amount fk 
-## Views
+
+
 # End
 # Functional
 
