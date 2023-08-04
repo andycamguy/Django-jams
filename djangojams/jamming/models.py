@@ -9,14 +9,14 @@ class Album(models.Model):
 
 class Artist(models.Model):
     name = models.CharField(max_length=100)
-    album = models.CharField(max_length=100)
-    genre_aff = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    genres = models.ManyToManyField(Genre)  # An artist can be in multiple genres
 
 class Song(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artists = models.ManyToManyField(Artist)  # A song can have many artists
+    genres = models.ManyToManyField(Genre)   # A song can be in multiple genres
 
 class Users(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -24,27 +24,12 @@ class Users(models.Model):
 class Playlist(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     label = models.CharField(max_length=100)
+    songs = models.ManyToManyField(Song, through='User_Playlist_Song')
 
-class Artist_Song(models.Model):
-    song_id = models.ForeignKey(Song, on_delete=models.CASCADE)
-    artist_id = models.ForeignKey(Artist, on_delete=models.CASCADE)
-
-class Album_Song(models.Model):
-    song_id = models.ForeignKey(Song, on_delete=models.CASCADE)
-    album_id = models.ForeignKey(Album, on_delete=models.CASCADE)
-
-class Genre_Song(models.Model):
-    song_id = models.ForeignKey(Song, on_delete=models.CASCADE)
-    genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
+class User_Playlist_Song(models.Model):
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
+    order = models.PositiveIntegerField()
 
 class Plays(models.Model):
     amount = models.ForeignKey(Song, on_delete=models.CASCADE)
-
-class User_Playlist(models.Model):
-    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    label = models.CharField(max_length=100)
-
-class User_Playlist_Song(models.Model):
-    song_id = models.ForeignKey(Song, on_delete=models.CASCADE)
-    playlist_id = models.ForeignKey(User_Playlist, on_delete=models.CASCADE)
-    order = models.PositiveIntegerField()
